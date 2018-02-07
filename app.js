@@ -4,7 +4,7 @@ app.use(express.static('public'));
 let identifiant = 3;
 
 const transforme_en_tableau = (collection) => {
-	let html = "<head><meta charset='utf-8'></head><body><table><tr><th>Nom</th><th>Prénom</th><th>Téléphone</th><th>Courriel</th><th>ID</th></tr>";
+	let html = "<head><meta charset='utf-8'><link rel='stylesheet' type='text/css' href='../css/style.css'></head><body><table><tr><th>Nom</th><th>Prénom</th><th>Téléphone</th><th>Courriel</th><th>ID</th></tr>";
 	for(elm of collection) {
 		html += "<tr>";
 		for(p in elm) {
