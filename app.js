@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 app.use(express.static('public'));
+let identifiant = 3;
 
 const transforme_en_tableau = (collection) => {
-	let html = "<head><meta charset='utf-8'></head><body><table><tr><th>Nom</th><th>Prénom</th><th>Courriel</th><th>ID</th></tr>";
+	let html = "<head><meta charset='utf-8'></head><body><table><tr><th>Nom</th><th>Prénom</th><th>Téléphone</th><th>Courriel</th><th>ID</th></tr>";
 	for(elm of collection) {
 		html += "<tr>";
 		for(p in elm) {
@@ -30,19 +31,21 @@ app.get('/traiter_get', function (req, res) {
  	// Preparer l'output en format JSON
 	console.log('la route /traiter_get')
 	const fs = require('fs');
+	identifiant++;
 	// on utilise l'objet req.query pour récupérer les données GET
 	reponse = {
 		prenom:req.query.prenom,
 		nom:req.query.nom,
 		telephone:req.query.telephone,
-		courriel:req.query.courriel
+		courriel:req.query.courriel,
+		id:identifiant
 	};
 	console.log(reponse);
 	fs.appendFile('public/data/membres.txt', "," + JSON.stringify(reponse), function (err) {
 		if (err) throw err;
 		console.log("Sauvegardé")
 	});
-	res.end("/membres");
+	res.end("Membre ajouté avec succès");
 })
 
 //=======================================================Route /html/membres.html
