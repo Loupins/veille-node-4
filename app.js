@@ -2,6 +2,18 @@ const express = require('express');
 const app = express();
 app.use(express.static('public'));
 
+const transforme_en_tableau = (collection) => {
+	let html = "<head><meta charset='utf-8'></head><body><table><tr><th>Nom</th><th>Prénom</th><th>Courriel</th><th>ID</th></tr>";
+	for(elm of collection) {
+		html += "<tr>";
+		for(p in elm) {
+			html += "<td>" + elm[p] + "</td>";
+		}
+		html += "</tr>";
+	}
+	html += "</table></body>";
+	return html;
+}
 //=======================================================Route /html/formulaire.html
 app.get('/formulaire', function (req, res) {
 	console.log(__dirname);
