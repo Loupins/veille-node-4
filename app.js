@@ -35,7 +35,11 @@ app.get('/traiter_get', function (req, res) {
 
 //=======================================================Route /html/membres.html
 app.get('/membres', function (req, res) {
-	
+	const fs = require("fs");
+	fs.readFile('public/data/membres.txt', "utf8", function (err, data) {
+		let collection = JSON.parse("[" + data + "]");
+		res.end(transforme_en_tableau(collection));
+	});
 })
 
 var server = app.listen(8081, function () {
