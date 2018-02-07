@@ -27,6 +27,12 @@ app.get('/traiter_get', function (req, res) {
 	res.end(JSON.stringify(reponse));
 })
 
+//=======================================================Route /html/membres.html
+app.get('/membres', function (req, res) {
+	const fs = require("fs");
+	let data = fs.readFileSync('public/data/membres.json');
+})
+
 var server = app.listen(8081, function () {
 	var host = server.address().address
 	var port = server.address().port
