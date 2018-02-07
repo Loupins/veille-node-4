@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 app.use(express.static('public'));
+
 //=======================================================Route /html/formulaire.html
 app.get('/formulaire', function (req, res) {
 	console.log(__dirname);
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 app.get('/traiter_get', function (req, res) {
  	// Preparer l'output en format JSON
 	console.log('la route /traiter_get')
+	const fs = require('fs');
 	// on utilise l'objet req.query pour récupérer les données GET
 	reponse = {
 		prenom:req.query.prenom,
@@ -24,14 +26,16 @@ app.get('/traiter_get', function (req, res) {
 		courriel:req.query.courriel
 	};
 	console.log(reponse);
-	res.end(JSON.stringify(reponse));
+	fs.appendFile('public/data/membres.txt', "," + JSON.stringify(reponse), function (err) {
+		if (err) throw err;
+		console.log("Sauvegardé")
+	});
+	res.end("/membres");
 })
 
 //=======================================================Route /html/membres.html
 app.get('/membres', function (req, res) {
-	const fs = require("fs");
-	let data = fs.readFileSync('public/data/membres.json');
-	res.end(data.toString());
+	
 })
 
 var server = app.listen(8081, function () {
