@@ -31,6 +31,7 @@ app.get('/traiter_get', function (req, res) {
 app.get('/membres', function (req, res) {
 	const fs = require("fs");
 	let data = fs.readFileSync('public/data/membres.json');
+	res.end(data.toString());
 })
 
 var server = app.listen(8081, function () {
